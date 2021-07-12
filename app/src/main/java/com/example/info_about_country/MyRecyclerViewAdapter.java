@@ -1,6 +1,9 @@
 package com.example.info_about_country;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,91 +13,91 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
+import com.androidnetworking.utils.Utils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.List;
 
-import java.util.ArrayList;
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+    private static final String TAG = "RETROFIT TRANSACTION";
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>
-
-
-{
-    ArrayList<String> list;
+    List<Root> list;
     Context context;
+    Boolean cached;
 
-    public MyRecyclerViewAdapter(Context context, ArrayList<String> list) {
-        this.list=list;
-        this.context=context;
+    public MyRecyclerViewAdapter(Context context, List<Root> list,Boolean cached) {
+        this.list = list;
+        this.context = context;
+        this.cached=cached;
     }
 
     @NonNull
     @Override
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       LayoutInflater layoutInflater=LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.recycler_row,parent,false);
+        View view = layoutInflater.inflate(R.layout.recycler_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String name,capital,region,subregion,popilation,borders,language;
+        String name, capital, region, subregion, popilation, borders, language;
 
         try {
-            JSONObject jsonObject=new JSONObject(list.get(position));
 
-            String info="";
-            if(jsonObject.getString("name").equals(""))
-              info = info +" NAME:"+ " " ;
-            else
-                info=info + " NAME:"+jsonObject.getString("name");
 
-            if(jsonObject.getString("capital").equals(""))
-                info = info + " CAPITAL:"+" " ;
+            String info = "";
+            if (list.get(position).name.equals(""))
+                info = info + " NAME: " + " ";
             else
-                info=info + " CAPITAL:"+jsonObject.getString("capital");
+                info = info + " NAME: " + list.get(position).name;
 
-            if(jsonObject.getString("region").equals(""))
-                info = info + " REGION:"+" " ;
+            if (list.get(position).capital.equals(""))
+                info = info + " CAPITAL: " + " ";
             else
-                info=info + " REGION:"+jsonObject.getString("region");
+                info = info + " CAPITAL: " + list.get(position).capital;
 
-            if(jsonObject.getString("subregion").equals(""))
-                info = info + " SUBREGION:"+" " ;
+            if (list.get(position).region.equals(""))
+                info = info + " REGION: " + " ";
             else
-                info=info + " SUBREGION:"+jsonObject.getString("subregion");
+                info = info + " REGION: " + list.get(position).region;
 
-            if(jsonObject.getString("population").equals(""))
-                info = info + " POPULATION:"+" " ;
+            if (list.get(position).subregion.equals(""))
+                info = info + " SUBREGION: " + " ";
             else
-                info=info + " POPULATION:"+jsonObject.getString("population");
+                info = info + " SUBREGION: " + list.get(position).subregion;
 
-            if(jsonObject.getString("borders").equals(""))
-                info = info + " BORDERS:"+" " ;
+            if (String.valueOf(list.get(position).population).equals(""))
+                info = info + " POPULATION: " + " ";
             else
-                info=info + " BORDERS:"+jsonObject.getString("borders");
+                info = info + " POPULATION: " + list.get(position).population;
 
-            if(jsonObject.getString("languages").equals(""))
-                info = info + " LANGUAGES:"+" " ;
+            if (list.get(position).borders.equals(""))
+                info = info + " BORDERS: " + " ";
             else
-                info=info + " LANGUAGES:"+jsonObject.getString("languages");
-            if(!jsonObject.getString("flag").equals("")) {
-                String url=jsonObject.getString("flag");
-                //GlideT.justLoadImage(activity, IMAGE_URI, targetImageView)
+                info = info + " BORDERS: " + list.get(position).borders;
+
+            if (list.get(position).languages.equals(""))
+                info = info + " LANGUAGES: " + " ";
+            else
+                info = info + " LANGUAGES: " + list.get(position).languages;
+
+            try {
+                if (!list.get(position).flag.equals(null)) {
+                    if (!cached) {
+                        Utilities.fetchSvg(context,list.get(position).flag,holder.imageView);
+                    }
+                }
             }
-
-
+            catch (Exception e) {
+                e.printStackTrace();
+            }
             holder.TtextView.setText(info);
-
-        } catch (JSONException e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
@@ -102,13 +105,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ;
         TextView TtextView;
         ImageView imageView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            TtextView=itemView.findViewById(R.id.textView);
-            imageView=itemView.findViewById(R.id.imageView);
+            TtextView = itemView.findViewById(R.id.textView);
+            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 }
