@@ -1,12 +1,12 @@
-package com.example.info_about_country;
+package com.example.Spacex;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface countriesService {
-    @GET("region/asia")
+public interface SpacexService {
+    @GET("crew")
     Call<List<Root>> getinfo();
 
 }

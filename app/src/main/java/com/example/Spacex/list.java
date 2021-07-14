@@ -1,4 +1,4 @@
-package com.example.info_about_country;
+package com.example.Spacex;
 
 public class list {
     String name;String capital;String region;String subregion ;String population; String border; String language;

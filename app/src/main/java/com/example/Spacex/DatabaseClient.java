@@ -1,4 +1,4 @@
-package com.example.info_about_country;
+package com.example.Spacex;
 
 import android.content.Context;
 
@@ -11,14 +11,14 @@ public class DatabaseClient {
     private static DatabaseClient mInstance;
 
     //our app database object
-    private CountryDatabase database;
+    private SpacexDatabase database;
 
     private DatabaseClient(Context mCtx) {
         this.mCtx = mCtx;
 
         //creating the app database with Room database builder
         //MyToDos is the name of the database
-        database = Room.databaseBuilder(mCtx, CountryDatabase.class,"CountryInfo").build();
+        database = Room.databaseBuilder(mCtx, SpacexDatabase.class,"Spacex").build();
     }
 
     public static synchronized DatabaseClient getInstance(Context mCtx) {
@@ -28,7 +28,7 @@ public class DatabaseClient {
         return mInstance;
     }
 
-    public CountryDatabase getDatabase() {
+    public SpacexDatabase getDatabase() {
         return database;
     }
 }

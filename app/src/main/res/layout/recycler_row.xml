@@ -7,33 +7,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="100dp">
+    android:layout_height="200dp">
 <RelativeLayout
-    android:background="@android:color/transparent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dp">
     <ImageView
 
         android:id="@+id/imageView"
-        android:layout_width="100dp"
+        android:layout_width="130dp"
         android:layout_alignTop="@+id/textView"
         android:layout_alignBottom="@+id/textView"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@drawable/ic_baseline_image_24"
         android:src="@drawable/ic_baseline_image_24"/>
-    <TextView
-        android:textSize="10sp"
-        android:paddingStart="10dp"
+    <RelativeLayout
+        android:textSize="15sp"
+        android:padding="10dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView"
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:text="TextView"
         android:gravity="start|center_vertical"
         android:layout_centerVertical="true"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp" >
+        <TextView
+
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/agency"
+            android:layout_below="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/st"
+            android:layout_below="@+id/agency"
+            android:layout_width="wrap_content"
+            android:text="STATUS : "
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_toRightOf="@+id/st"
+            android:id="@+id/status"
+            android:layout_below="@+id/agency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/id"
+            android:layout_below="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/launches"
+            android:layout_below="@+id/id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <androidx.cardview.widget.CardView
+            android:elevation="5dp"
+            android:id="@+id/card_wikipedia"
+            app:cardElevation="5dp"
+            android:padding="15dp"
+            android:layout_below="@+id/launches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/wikipedia"
+            android:layout_width="wrap_content"
+            android:src="@drawable/wikipedia"
+            android:layout_height="20dp"/>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -5,6 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <RelativeLayout
+        android:background="#A8515151"
+        android:id="@+id/webLayout"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/ic_baseline_close_24"
+            android:id="@+id/closeWebview"
+            android:layout_above="@+id/webView"
+            android:layout_alignRight="@+id/webView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+    <WebView
+        android:layout_centerInParent="true"
+        android:id="@+id/webView"
+        android:layout_width="350dp"
+        android:layout_height="500dp" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/no_connection"
@@ -29,6 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp" />
+
+
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

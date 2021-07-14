@@ -1,4 +1,4 @@
-package com.example.info_about_country;
+package com.example.Spacex;
 
 import org.junit.Test;
 

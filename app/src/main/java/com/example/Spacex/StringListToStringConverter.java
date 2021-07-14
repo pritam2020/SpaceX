@@ -1,4 +1,4 @@
-package com.example.info_about_country;
+package com.example.Spacex;
 
 import androidx.room.TypeConverter;
 
@@ -8,26 +8,26 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class CurrencyConverter {
+public class StringListToStringConverter {
     @TypeConverter
-    public String fromCountryLangList(List<Currency> countryLang) {
+    public String fromCountryLangList(List<String> countryLang) {
         if (countryLang == null) {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Currency>>() {}.getType();
+        Type type = new TypeToken<List<String>>() {}.getType();
         String json = gson.toJson(countryLang, type);
         return json;
     }
 
     @TypeConverter
-    public List<Currency> toCountryLangList(String countryLangString) {
+    public List<String> toCountryLangList(String countryLangString) {
         if (countryLangString == null) {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Currency>>() {}.getType();
-        List<Currency> countryLangList = gson.fromJson(countryLangString, type);
+        Type type = new TypeToken<List<String>>() {}.getType();
+        List<String> countryLangList = gson.fromJson(countryLangString, type);
         return countryLangList;
     }
 }
